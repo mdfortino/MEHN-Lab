@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mdfortino/MEHN-Lab#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "lodash": "^4.17.11"
   }
 }
