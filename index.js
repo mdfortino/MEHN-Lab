@@ -1,39 +1,36 @@
-const express = require("express")
-const app = express()
-const bodyParser = require("body-parser")
-const router = require('./routes/index')
+// const express = require("express")
+// const app = express()
+// const bodyParser = require("body-parser")
+// const router = require('./routes/index')
 
 
-// app.get("/", (request, response) => {
-//   response.send("Hello World")
+
+
+// app.use('/', router)
+
+// app.use(bodyParser.urlencoded({ extended: true }))
+
+// app.set("view engine", "hbs")
+
+
+
+// app.listen(4000, () => {
+//   console.log("app listening on port 4000")
 // })
 
-app.use('/', router)
+const express = require("express");
+const hbs = require("hbs");
+const bodyParser = require("body-parser");
+// const methodOverride = require("method-override");
 
-app.use(bodyParser.urlencoded({ extended: true }))
+const app = express();
+hbs.registerPartials(__dirname + "/views/partials"); 
+// how we serve css files w/in Express
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "hbs");
+// app.use(methodOverride("_method"));
 
-app.set("view engine", "hbs")
+app.use(require("./routes/index.js"));
 
-
-// app.get("/:name", function (req, res) {
-//   res.render('index',{ name: req.params.name})
-// })
-
-// app.post("/", (req, res) => {
-//     res.send(`hello ${req.body.name}`)
-//   })
-  
-// app.post("/", (req, res) => {
-//     res.render("index", {
-//       name: req.body.firstName,
-//     })
-//   })
-
-// app.get("/", (req, res) => {
-//     res.render("welcome")
-//   }) 
-
-app.listen(4000, () => {
-  console.log("app listening on port 4000")
-})
-
+app.listen(4000, () => console.log("4000 server is running"));

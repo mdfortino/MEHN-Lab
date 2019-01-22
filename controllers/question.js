@@ -32,6 +32,10 @@ module.exports = {
           })
         })
       })
+    },
+    delete: (req, res) => {
+      Question.findOneAndRemove({ _id: req.params.id }).then(question => {
+        res.redirect('/')
+      })
     }
-  }
-  
+  };

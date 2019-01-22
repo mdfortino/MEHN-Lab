@@ -1,24 +1,12 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-// router.get('/', controller.action)
+router.use('/', require('./application.js'));
+router.use('/user', require('./user'));
+router.use('/question', require('./question'));
 
-router.get("/:name", function (req, res) {
-    res.render('index',{ name: req.params.name})
-  })
-  
-  router.post("/", (req, res) => {
-      res.send(`hello ${req.body.name}`)
-    })
-    
-  router.post("/", (req, res) => {
-      res.render("index", {
-        name: req.body.firstName,
-      })
-    })
-  
-  router.get("/", (req, res) => {
-      res.render("welcome")
-    }) 
+router.all('*', (req, res) => {
+  res.status(400).send();
+});
 
-module.exports = router
+module.exports = router;

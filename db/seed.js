@@ -1,5 +1,9 @@
 const User = require("../models/User");
 const { Question } = require("../models/Question");
+const bcrypt = require("bcrypt-nodejs");
+
+const createPassword = password =>
+  bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 
 User.find({}).remove(() => {
   Question.find({}).remove(() => {
@@ -74,4 +78,4 @@ User.find({}).remove(() => {
   })
 
 
-User.create({})
+
