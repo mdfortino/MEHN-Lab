@@ -5,6 +5,7 @@ const questionController = require("../controllers/question");
 router.post("/", questionController.create);
 router.get("/new", questionController.new);
 router.get("/:id", questionController.show);
+router.put("/:id", questionController.update);
 router.delete("/:id", questionController.delete);
 
 module.exports = router;

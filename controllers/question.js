@@ -11,13 +11,13 @@ module.exports = {
           answers
         ) {
           question.answers = answers
-          res.render("index", question)
+          res.render("question/show", question)
         })
       })
   },
     new: (req, res) => {
       User.find({}).then(users => {
-        res.render("index", { users })
+        res.render("question/new", { users })
       })
     },
     create: (req, res) => {
@@ -32,6 +32,18 @@ module.exports = {
           })
         })
       })
+    },
+    update: (req, res) => {
+      let { content, author } = req.body;
+      Question.findOne({ _id: req.params.id }).then(question => {
+        question.comments.push({
+          content,
+          author
+        });
+        question.save(err => {
+          res.redirect(`/question/${question._id}`);
+        });
+      });
     },
     delete: (req, res) => {
       Question.findOneAndRemove({ _id: req.params.id }).then(question => {
