@@ -21,16 +21,20 @@ module.exports = {
       })
     },
     create: (req, res) => {
+      console.log('body', req.body)
       Question.create({
         content: req.body.question.content,
         author: req.body.author
       }).then(question => {
+        console.log('question ', question)
         User.findOne({ _id: req.body.author }).then(user => {
           user.questions.push(question)
-          user.save(err => {
+          user.save(result => {
+            console.log(result)
             res.redirect(`/question/${question._id}`)
           })
         })
+
       })
     },
     update: (req, res) => {
