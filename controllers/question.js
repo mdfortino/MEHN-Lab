@@ -1,15 +1,37 @@
+const {Question, Answer} = require("../models/Question")
+const User = require("../models/User")
+
 module.exports = {
     show: (req, res) => {
-      console.log("question/show");
-      res.render("index", { page: "question show page" });
-    },
+      Question.findOne({ _id: req.params.id })
+      .populate("author")
+      .exec(function(err, question) {
+        Answer.populate(question.answers, { path: "author" }, function(
+          err,
+          answers
+        ) {
+          question.answers = answers
+          res.render("index", question)
+        })
+      })
+  },
     new: (req, res) => {
-      console.log("question/new");
-      res.render("index", { page: "create a new question" });
+      User.find({}).then(users => {
+        res.render("index", { users })
+      })
     },
     create: (req, res) => {
-      console.log("question/create");
-      res.redirect("question/1");
+      Question.create({
+        content: req.body.question.content,
+        author: req.body.author
+      }).then(question => {
+        User.findOne({ _id: req.body.author }).then(user => {
+          user.questions.push(question)
+          user.save(err => {
+            res.redirect(`/question/${question._id}`)
+          })
+        })
+      })
     }
-  };
+  }
   

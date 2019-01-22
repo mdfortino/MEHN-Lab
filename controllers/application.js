@@ -1,5 +1,11 @@
+const { Question } = require("../models/Question")
 module.exports = {
     index: (req, res) => {
-      res.render("index", { page: "homepage" });
+      Question.find({})
+      .populate("author")
+      .then(questions => {
+        res.render("index", { questions });
+      })
+
     }
   };
