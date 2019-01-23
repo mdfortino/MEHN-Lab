@@ -1,15 +1,27 @@
+const User = require("../models/User");
+const { Question } = require("../models/Question");
+
 module.exports = {
-    show: (req, res) => {
-      console.log("user/show");
-      res.render("index", { page: "user show page" });
-    },
-    new: (req, res) => {
-      console.log("user/new");
-      res.render("index", { page: "user new page" });
-    },
-    create: (req, res) => {
-      console.log("user/create");
-      res.redirect(`/user/1`);
-    }
-  };
-  2
+  show: (req, res) => {
+    User.findOne({ _id: req.params.id })
+      .populate({
+        path: "questions",
+        options: { limit: 5, sort: { createdAt: -1 } }
+      })
+      .then(user => {
+        res.render("user/show", { user });
+      });
+  },
+  new: (req, res) => {
+    res.render("user/new");
+  },
+  create: (req, res) => {
+    User.create({
+      email: req.body.email,
+      password: req.body.password
+    }).then(user => {
+      res.redirect(`/user/${user._id}`);
+    });
+  }
+};
+  
