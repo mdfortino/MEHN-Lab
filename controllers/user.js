@@ -12,4 +12,4 @@ module.exports = {
       res.redirect(`/user/1`);
     }
   };
-  
+  2
