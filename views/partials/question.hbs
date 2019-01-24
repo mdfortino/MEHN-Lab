@@ -13,19 +13,4 @@
     </form>
   </div>
 </div>
-{{#if answers.length}}
-  {{#each answers}}
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">
-          {{ content }}
-        </span>
-      </div>
-      <div class="card-action">
-        <a href="/user/{{ author.id }}" class="">{{ author.email }}</a>
-        <span class="question__date">{{ createdAt }}</span>
-        <span class="question_answers">{{ answers.length }} Answers</span>
-      </div>
-    </div>
-  {{/each}}
-{{/if}}
+
