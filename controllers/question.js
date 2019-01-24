@@ -34,10 +34,10 @@ module.exports = {
             res.redirect(`/question/${question._id}`)
           })
         })
-
       })
     },
     update: (req, res) => {
+      console.log('body', req.body)
       let { content, author } = req.body;
       Question.findOne({ _id: req.params.id }).then(question => {
         question.comments.push({
@@ -52,6 +52,13 @@ module.exports = {
     delete: (req, res) => {
       Question.findOneAndRemove({ _id: req.params.id }).then(question => {
         res.redirect('/')
-      })
+      });
+    },
+  requireAuth: function(req, res, next) {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/");
     }
-  };
+  }
+};

@@ -8,6 +8,5 @@ module.exports = {
       .then(questions => {
         res.render("app/index", { questions });
       })
-
     }
   };
