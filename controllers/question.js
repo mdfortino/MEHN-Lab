@@ -52,6 +52,13 @@ module.exports = {
     delete: (req, res) => {
       Question.findOneAndRemove({ _id: req.params.id }).then(question => {
         res.redirect('/')
-      })
+      });
+    },
+  requireAuth: function(req, res, next) {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res.redirect("/");
     }
-  };
+  }
+};

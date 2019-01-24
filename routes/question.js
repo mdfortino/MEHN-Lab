@@ -6,6 +6,7 @@ router.post("/", questionController.requireAuth, questionController.create);
 router.get("/new", questionController.requireAuth, questionController.new);
 router.get("/:id", questionController.show);
 router.put("/:id", questionController.requireAuth, questionController.update);
+router.delete("/:id", questionController.requireAuth, questionController.delete)
 
 
 // router.post("/", questionController.create);
