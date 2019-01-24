@@ -1,5 +1,6 @@
 const mongoose = require("../db/connection");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt-nodejs");
 
 const User = new Schema({
   email: String,
@@ -17,7 +18,8 @@ User.methods.encrypt = function(password) {
 };
 
 User.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.local.password);
+  // removed local from local.password
+  return bcrypt.compareSync(password, this.password);
 };
 
 

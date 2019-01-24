@@ -1,6 +1,7 @@
 // removed local - was "passport-local"
-const LocalStrategy = require("passport").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/User");
+const bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, callback) {

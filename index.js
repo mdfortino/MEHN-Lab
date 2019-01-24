@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
-// const flash = require("connect-flash");
+const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
@@ -18,7 +18,7 @@ app.use(passport.session())
 
 
 
-// app.use(flash());
+app.use(flash());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
