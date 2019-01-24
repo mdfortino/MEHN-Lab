@@ -1,4 +1,5 @@
-const LocalStrategy = require("passport-local").Strategy;
+// removed local - was "passport-local"
+const LocalStrategy = require("passport").Strategy;
 const User = require("../models/User");
 
 module.exports = function(passport) {
