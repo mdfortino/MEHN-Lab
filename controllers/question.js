@@ -40,7 +40,7 @@ module.exports = {
       console.log('body', req.body)
       let { content, author } = req.body;
       Question.findOne({ _id: req.params.id }).then(question => {
-        question.comments.push({
+        question.answers.push({
           content,
           author
         });
